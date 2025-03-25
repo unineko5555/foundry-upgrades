@@ -14,11 +14,12 @@ contract DeployBox is Script {
     }
 
     function deployBox() public returns(address) {
-        vm.startBroadcast();
+        // vm.startBroadcast();
         BoxV1 box = new BoxV1(); // Implementation(Logic), delegatecall to borrow those functions
-        ERC1967Proxy proxy = new ERC1967Proxy(address(box), "");
-        // BoxV1(address(proxy)).initialize(); // 追加
-        vm.stopBroadcast(); 
+        ERC1967Proxy proxy = new ERC1967Proxy(address(box), ""); //deploy後に実行されるinitializerの呼び出しにし使用できるが、initialize()がないためdataは空
+        //initialize() 関数が BoxV1 の状態を初期化し、その結果として setNumber の呼び出しがリバートしなくなる、testProxyStartAsBoxV1のためにコメントアウト
+        BoxV1(address(proxy)).initialize(); 
+        // vm.stopBroadcast(); 
         return address(proxy);
     }
 }

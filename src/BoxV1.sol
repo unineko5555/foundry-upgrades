@@ -19,9 +19,10 @@ contract BoxV1 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
 
     uint256 internal number;
 
-    function setNumber(uint256 _number) external {
-        number = _number;
-    }
+    // testProxyStartAsBoxV1を通すためにコメントアウト
+    // function setNumber(uint256 _number) external {
+    //     number = _number;
+    // }
 
     function getNumber() external view returns (uint256) {
         return number;
@@ -32,4 +33,9 @@ contract BoxV1 is Initializable, UUPSUpgradeable, OwnableUpgradeable {
     }
     // onlyOwner追加
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
+
+    // owner() 関数を追加
+    function owner() public view override returns (address) {
+        return OwnableUpgradeable.owner();
+    }
 }
