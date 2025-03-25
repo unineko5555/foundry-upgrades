@@ -24,6 +24,7 @@ contract DeployAndUpgradeTest is Test {
         console.log("setUp - Proxy owner:", BoxV1(proxy).owner()); // BoxV1 に owner() 関数が必要
     }
 
+    //test passing!!
     function testUpgrades() public {
         BoxV2 box2 = new BoxV2();
         // upgrader.upgradeBox(proxy, address(box2));
@@ -48,6 +49,7 @@ contract DeployAndUpgradeTest is Test {
         assertEq(7, BoxV2(proxy).getNumber());
     }
 
+    //test passing!!
     function testProxyStartAsBoxV1() public {
         vm.expectRevert();
         BoxV2(proxy).setNumber(7);
