@@ -15,6 +15,7 @@ contract DeployAndUpgradeTest is Test {
 
     function setUp() public {
         deployer = new DeployBox();
+        deployer.setOwner(OWNER);
         upgrader = new UpgradeBox();
         vm.prank(OWNER);
         proxy = deployer.run(); //boxでなくproxyでデプロイされる, 今はboxV1を指している
